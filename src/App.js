@@ -1,20 +1,21 @@
-import React, { useContext } from 'react';
-
-import Login from './components/Login/Login';
-import Home from './components/Home/Home';
-import MainHeader from './components/MainHeader/MainHeader';
-import authContext from './Store/AuthContext';
+import React,{useState} from 'react';
+import SellerAdmin from './components/Seller Admin/SellerAdmin';
+import Orders from './components/order/order';
 
 function App() {
-  const ctx = useContext(authContext);
+  const [productName,setproduct]=useState([])
+ const displayhandler=(Orders)=>{
+
+    setproduct((prev)=>{
+      return[...prev,Orders]
+    })
+
+ }
   return (
-    <React.Fragment>
-      <MainHeader />
-      <main>
-        {!ctx.isLoggedIn && <Login/>}
-        {ctx.isLoggedIn && <Home/>}
-      </main>
-      </React.Fragment>
+    <div>
+    <SellerAdmin onorder={displayhandler}/>
+    <Orders valu={productName}/>
+    </div>
   );
 }
 
